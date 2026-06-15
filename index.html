@@ -95,6 +95,27 @@
             box-shadow: 1px 1px 0px var(--dark);
         }
 
+        /* ปุ่มเริ่มจับเวลา */
+        .btn-timer-trigger {
+            background: #12CBC4;
+            color: var(--dark);
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 10px 25px;
+            border: 3px solid var(--dark);
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px var(--dark);
+            transition: 0.1s;
+            margin-bottom: 5px;
+        }
+
+        .btn-timer-trigger:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px var(--dark);
+        }
+
         /* บอร์ดคะแนน 5 กลุ่มด้านบน */
         .scoreboard {
             display: grid;
@@ -344,7 +365,6 @@
 
     <div class="app-window">
         
-        <!-- ส่วนหัว: ชื่อเกม ปุ่มควบคุมสำหรับครู และ Scoreboard -->
         <div class="app-header">
             <div class="app-title-zone">
                 <h1 class="app-title">🎮 Teen Evolution ม.2</h1>
@@ -360,26 +380,24 @@
             </div>
         </div>
 
-        <!-- ส่วนกลาง: การ์ดโจทย์และตัวจับเวลา -->
         <div class="main-playzone">
             <div class="question-card">
                 <div id="avatar" class="question-avatar">🚀</div>
                 <div id="situation-title" class="question-text" style="text-align: center; width: 100%;">
                     ยินดีต้อนรับคุณครูมาร์ทและนักเรียน ม.2 ทุกคน!<br>
-                    <span style="font-size:1.2rem; font-weight:normal; color:#666;">กดปุ่ม "🎲 เริ่มสุ่มคำถาม" ด้านบนเพื่อเริ่มความสนุกได้เลยเพื่อน!</span>
+                    <span style="font-size:1.2rem; font-weight:normal; color:#666;">กดปุ่ม "🎲 เริ่มสุ่มคำถาม" ด้านบนเพื่อเปิดโจทย์แรกให้นักเรียนอ่านได้เลยครับ</span>
                 </div>
             </div>
 
-            <!-- แถบเวลาถอยหลัง (ซ่อนไว้ก่อนเริ่มเกม) -->
             <div class="timer-zone" id="timer-area" style="visibility: hidden;">
                 <div class="timer-label" id="timer-text">เวลา: 25 วิ</div>
-                <div class="timer-track">
+                <div class="timer-track" style="margin-right: 15px;">
                     <div class="timer-bar" id="timer-bar"></div>
                 </div>
+                <button class="btn-timer-trigger" id="start-timer-btn" onclick="startCountdown()">⏳ เริ่มนับเวลาถอยหลัง (25 วิ)</button>
             </div>
         </div>
 
-        <!-- แถบเลือกกลุ่มสิทธิ์การตอบ -->
         <div id="selector-zone" class="selector-zone" style="visibility: hidden;">
             <span class="selector-label">📢 กลุ่มไหนยกมือก่อน? ให้ครูคลิกเลือกกลุ่ม:</span>
             <button class="team-btn" id="btn-t1" onclick="selectTeam(1)">กลุ่ม 1</button>
@@ -389,7 +407,6 @@
             <button class="team-btn" id="btn-t5" onclick="selectTeam(5)">กลุ่ม 5</button>
         </div>
 
-        <!-- แผงปุ่มคำตอบ 4 ด้าน -->
         <div id="answer-area" class="answers-grid" style="visibility: hidden;">
             <div class="answer-button kh-red" onclick="checkAnswer('body')">
                 <div class="answer-shape">▲</div>
@@ -421,7 +438,6 @@
             </div>
         </div>
 
-        <!-- หน้าต่างป๊อปอัปเฉลยผลลัพธ์ (Modal) -->
         <div id="result-modal" class="modal-overlay hidden">
             <div class="modal-content">
                 <div id="modal-status" class="modal-status">🏆 ผลลัพธ์คำตอบ</div>
@@ -436,7 +452,7 @@
         // คลังข้อคำถามวิเคราะห์ 12 ข้อ
         const situations = [
             { text: "เบสตั้งใจอ่านหนังสือสอบจนถึงตี 3 ติดต่อกันหลายวัน แต่พอเข้าห้องสอบจริงกลับรู้สึกเบลอ ตื้อ คิดเลขไม่ออก และมีอาการปวดหัวตึบๆ ปัจจัยต้นเหตุหลักส่งผลกระทบต่อพัฒนาการด้านใด?", aspect: "body", explain: "การนอนดึก (พักผ่อนไม่เพียงพอ) เป็นปัจจัยทางด้านร่างกายที่เป็นต้นเหตุแรกสุด ทำให้สมองเบลอและเกิดอาการทางกายภาพก่อน แล้วจึงส่งผลกระทบต่อเนื่องไปยังระบบความคิดความจำทีหลังครับ", avatar: "📝" },
-            { text: "ฟ้าเห็นเพื่อนสนิทในกลุ่มพากันไปเจาะสะดือและย้อมสีผมสีแรงๆ ฟ้ากลัวว่าจะคุยกับเพื่อนไม่รู้เรื่องและกลัวเพื่อนไม่คบ จึงตัดสินใจไปทำตามเพื่อนบ้าง ปัจจัยนี้เกี่ยวข้องกับด้านใดที่สุด?", aspect: "social", explain: "มีแรงผลักดันมาจาก 'กลุ่มเพื่อน' และความต้องการ 'การยอมรับในกลุ่มสังคม' เพื่อให้เข้ากับพวกพ้องได้ วัยรุ่นจึงยอมเปลี่ยนแปลงพฤติกรรมภายนอกของตัวเองตามกลุ่มเพื่อน", avatar: "💇‍♀️" },
+            { text: "ฟ้าเห็นเพื่อนสนิทในกลุ่มพากันไปเจาะสะดือและย้อมสีผมสีแรงๆ ฟ้ากลัวว่าจะคุยกับเพื่อนไม่รู้เรื่องและกลัวเพื่อนไม่คบ จึงตัดสินใจไปทำตามเพื่อนบ้าง ปัจจัยนี้เกี่ยวข้องกับด้านใดที่สุด?", aspect: "social", explain: "มีแรงผลักดันมาจาก 'กลุ่มเพื่อน' และความต้องการ 'การยอมรับในกลุ่มสังคม' เพื่อให้เข้ากับพวกพ้องได้ วัยรุ่นจึงยอมเปลี่ยนแปลงพฤทีความภายนอกของตัวเองตามกลุ่มเพื่อน", avatar: "💇‍♀️" },
             { text: "โอ๊ตแอบชอบเพื่อนคนหนึ่งในห้อง พอเห็นเขาเดินผ่าน โอ๊ตจะรู้สึกใจสั่น มือสั่น ทำตัวไม่ถูก และบางทีก็หงุดหงิดง่ายขึ้นโดยไม่มีสาเหตุ ปัจจัยภายในนี้กระทบต่อด้านใดโดยตรง?", aspect: "mind", explain: "เป็นเรื่องความรู้สึกหวั่นไหวภายในจิตใจ การควบคุมอารมณ์ที่แปรปรวนง่าย และการตอบสนองต่อสิ่งเร้าทางความรู้สึก ซึ่งเป็นแกนหลักของพัฒนาการด้านจิตใจและอารมณ์ในวัยรุ่น", avatar: "😳" },
             { text: "พีทชอบเล่นเกมแนวสืบสวนและต่อจิ๊กซอว์ 1,000 ชิ้นคนเดียวในห้อง พีทสามารถจำรายละเอียดของเรื่องราวต่างๆ ได้แม่นยำมาก แต่ไม่ชอบออกไปคุยกับใคร พัฒนาการเด่นของพีทคือด้านใด?", aspect: "intel", explain: "เกี่ยวข้องโดยตรงกับความจำ กระบวนการคิดวิเคราะห์ และการแก้ปัญหาเชิงตรรกะ แม้พฤติกรรมจะดูแยกตัวไม่เข้าสังคม แต่ตัวชี้วัดความสามารถในโจทย์เน้นเรื่องศักยภาพทางสมองและสติปัญญา", avatar: "🧩" },
             { text: "แก้วประจำเดือนมาไม่ปกติและเริ่มมีสิวขึ้นเต็มใบหน้า ทำให้แก้วส่องกระจกทีไรก็รู้สึกหงุดหงิด ไม่มั่นใจ และไม่อยากออกไปเจอหน้าใครเลย ปัจจัยแรกเริ่มที่เป็นตัวกระตุ้นคือด้านใด?", aspect: "body", explain: "ปัจจัยแรกเริ่มคือ 'ฮอร์โมนร่างกาย' (ประจำเดือน/สิว) ซึ่งเป็นพัฒนาการทางกายภาพตามธรรมชาติของวัยรุ่น จากนั้นการเปลี่ยนแปลงทางกายนี้ค่อยส่งผลกระทบต่อเนื่องไปทำให้จิตใจขาดความมั่นใจ", avatar: "🧼" },
@@ -446,7 +462,7 @@
             { text: "คุณพ่อคุณแม่ของบอยเป็นคนรูปร่างสูงใหญ่ บอยจึงมีส่วนสูงที่เพิ่มขึ้นอย่างรวดเร็วกว่าเพื่อนในวัยเดียวกัน ปัจจัยที่มีผลกระทบในข้อนี้มาจากสิ่งใดและด้านใด?", aspect: "body", explain: "ความสูงที่ได้มาจากพ่อแม่คือปัจจัยภายในที่เรียกว่า 'พันธุกรรม' ซึ่งส่งผลกระทบและกำหนดโครงสร้างการเจริญเติบโตทางด้านร่างกายโดยตรง", avatar: "🦒" },
             { text: "เอมชอบเข้าร่วมกิจกรรมโต้วาทีและรับฟังเหตุผลของผู้อื่นเสมอ ทำให้เอมเป็นคนใจกว้าง สามารถแยกแยะข้อดีข้อเสียของเรื่องต่างๆ และกล้าตัดสินใจแก้ปัญหาด้วยตัวเอง พัฒนาการเด่นคือด้านใด?", aspect: "intel", explain: "การใช้เหตุผล การรับฟังความคิดเห็นเพื่อนำมาวิเคราะห์ การแยกแยะข้อดีข้อเสีย และการตัดสินใจแก้ปัญหาอย่างมีระบบ เป็นลักษณะเด่นของพัฒนาการด้านสติปัญญาขั้นสูงในวัยรุ่น", avatar: "🗣️" },
             { text: "ตูนมักจะรู้สึกหงุดหงิดฉุนเฉียวและขึ้นเสียงใส่คนในบ้านบ่อยๆ แต่หลังจากอารมณ์เย็นลง ตูนจะรู้สึกผิดและเข้าไปกราบขอโทษพ่อแม่ทันที พฤติกรรมที่แปรปรวนง่ายนี้จัดอยู่ในด้านใด?", aspect: "mind", explain: "ลักษณะอารมณ์ที่ขึ้นลงแปรปรวนอย่างรวดเร็ว (หงุดหงิดง่ายแต่ก็รู้สึกผิดได้เร็ว) เป็นธรรมชาติของวัยรุ่นที่ระบบควบคุมอารมณ์ยังพัฒนาไม่เต็มที่ จึงจัดอยู่ในด้านจิตใจและอารมณ์", avatar: "⚡" },
-            { text: "โจ้อาศัยอยู่ในบ้านที่คนในครอบครัวมักจะใช้เหตุผลคุยกัน ชื่นชมเมื่อโจ้ทำดี และยอมรับฟังสื่อสารกันตรงๆ ทำให้โจ้เป็นเด็กอารมณ์ดีและมีบุคลิกภาพที่มั่นคง ปัจจัยภายนอกนี้คืออะไร?", aspect: "social", explain: "สิ่งแวดล้อมและการเลี้ยงดูภายใน 'ครอบครัว' ถือเป็นปัจจัยภายนอกทางด้านสังคมที่สำคัญที่สุดในการหล่อหลอมและส่งผลกระทบต่อพฤเบสและพัฒนาการรอบด้านของวัยรุ่น", avatar: "👨‍👩‍👦" }
+            { text: "โจ้อาศัยอยู่ในบ้านที่คนในครอบครัวมักจะใช้เหตุผลคุยกัน ชื่นชมเมื่อโจ้ทำดี และยอมรับฟังสื่อสารกันตรงๆ ทำให้โจ้เป็นเด็กอารมณ์ดีและมีบุคลิกภาพที่มั่นคง ปัจจัยภายนอกนี้คืออะไร?", aspect: "social", explain: "สิ่งแวดล้อมและการเลี้ยงดูภายใน 'ครอบครัว' ถือเป็นปัจจัยภายนอกทางด้านสังคมที่สำคัญที่สุดในการหล่อหลอมและส่งผลกระทบต่อพฤติกรรมและพัฒนาการรอบด้านของวัยรุ่น", avatar: "👨‍👩‍👦" }
         ];
 
         let currentQuestion = null;
@@ -454,10 +470,10 @@
         let scores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
         let timerInterval = null;
         let timeLeft = 25; 
-        const TOTAL_TIME = 25; // วินาทีทั้งหมด
+        const TOTAL_TIME = 25; 
 
         function nextQuestion() {
-            // เคลียร์ Interval เก่าออกให้สะอาดก่อนทุกครั้ง
+            // หยุดเวลาเดิมทั้งหมดก่อนชั่วคราว
             clearInterval(timerInterval);
             selectedTeamNum = null;
             timeLeft = TOTAL_TIME; 
@@ -468,38 +484,49 @@
                 document.getElementById(`team-box-${i}`).classList.remove('active-team');
             }
 
-            // สุ่มคำถามใหม่
+            // สุ่มคำถามชุดใหม่ขึ้นแสดงผล
             const randomIndex = Math.floor(Math.random() * situations.length);
             currentQuestion = situations[randomIndex];
 
             document.getElementById('avatar').innerText = currentQuestion.avatar;
             document.getElementById('situation-title').innerText = currentQuestion.text;
             
-            // เปิดแสดงองค์ประกอบแอปทั้งหมดพร้อมกัน
+            // แสดงผล UI ทั้งหมด แต่เวลาจะยัง "นิ่ง" อยู่เพื่อรอครูกดเริ่มรัน
             document.getElementById('timer-area').style.visibility = 'visible';
             document.getElementById('selector-zone').style.visibility = 'visible';
             document.getElementById('answer-area').style.visibility = 'visible';
             
+            // เปิดใช้งานปุ่มเริ่มจับเวลาสีฟ้าให้กลับมาคลิกได้ใหม่
+            const startTimerBtn = document.getElementById('start-timer-btn');
+            startTimerBtn.disabled = false;
+            startTimerBtn.style.opacity = '1';
+            startTimerBtn.innerText = "⏳ เริ่มนับเวลาถอยหลัง (25 วิ)";
+
             document.getElementById('control-game-btn').innerText = "⏭️ สุ่มข้อต่อไป";
 
-            // อัปเดตข้อความเวลาเริ่มต้น
-            document.getElementById('timer-text').innerText = `เวลา: ${timeLeft} วิ`;
-            
-            // ตั้งค่าความกว้างหลอดสีแดงเป็น 100% เริ่มต้น
-            const timerBar = document.getElementById('timer-bar');
-            timerBar.style.width = '100%';
+            // เซ็ตหลอดเวลาให้เต็มรอไว้ก่อนอย่างเงียบๆ
+            document.getElementById('timer-text').innerText = `เวลาเตรียมตัว: ${timeLeft} วิ`;
+            document.getElementById('timer-bar').style.width = '100%';
+        }
 
-            // เริ่มนับถอยหลังโดยคุมความกว้างหลอดผ่านพลัง JavaScript โดยตรง
+        function startCountdown() {
+            // ล้างบิตอินเตอร์วัลตกค้าง (ถ้ามี)
+            clearInterval(timerInterval);
+            
+            const startTimerBtn = document.getElementById('start-timer-btn');
+            startTimerBtn.disabled = true; // ล็อกปุ่มไว้กันครูกดซ้ำ
+            startTimerBtn.style.opacity = '0.5';
+            startTimerBtn.innerText = "🔥 เวลากำลังเดิน...";
+
+            const timerBar = document.getElementById('timer-bar');
+
+            // เริ่มทำการนับถอยหลังวินาทีจริง
             timerInterval = setInterval(() => {
                 timeLeft--;
-                
-                // ป้องกันเวลาติดลบ
                 if (timeLeft < 0) timeLeft = 0; 
 
-                // แสดงผลตัวเลขวิบนหน้าจอ
                 document.getElementById('timer-text').innerText = `เวลา: ${timeLeft} วิ`;
                 
-                // คำนวณเปอร์เซ็นต์ความกว้างและอัปเดตหลอดสีแดงโดยตรง
                 let widthPercentage = (timeLeft / TOTAL_TIME) * 100;
                 timerBar.style.width = widthPercentage + '%';
 
@@ -517,58 +544,3 @@
                 document.getElementById(`team-box-${i}`).classList.remove('active-team');
             }
             document.getElementById(`btn-t${teamNum}`).classList.add('selected');
-            document.getElementById(`team-box-${teamNum}`).classList.add('active-team');
-        }
-
-        function checkAnswer(selectedAspect) {
-            if (!currentQuestion) return;
-            if (selectedTeamNum === null) {
-                alert("📢 ครูมาร์ทอย่าลืมคลิกเลือก 'กลุ่มที่ยกมือก่อน' ในแถบสีฟ้าด้านบนด้วยครับเพื่อน!");
-                return;
-            }
-
-            // หยุดเวลาทันทีที่มีการกดตอบ
-            clearInterval(timerInterval);
-
-            const modal = document.getElementById('result-modal');
-            const modalStatus = document.getElementById('modal-status');
-            const modalExplain = document.getElementById('modal-explain');
-
-            let aspectText = { body: "ด้านร่างกาย", mind: "ด้านจิตใจและอารมณ์", social: "ด้านสังคม", intel: "ด้านสติปัญญา" }[currentQuestion.aspect];
-
-            if (selectedAspect === currentQuestion.aspect) {
-                scores[selectedTeamNum] += 1;
-                modalStatus.innerHTML = `<span class="status-correct">🎉 ถูกต้องแม่นยำ! กลุ่มที่ ${selectedTeamNum} รับไป 1 คะแนน</span>`;
-            } else {
-                modalStatus.innerHTML = `<span class="status-wrong">❌ ยังไม่ถูกจ้า กลุ่มที่ ${selectedTeamNum}!</span><br><small style="font-size:1.2rem; color:#666;">เฉลยข้อนี้คือ: <b>${aspectText}</b></small>`;
-            }
-
-            modalExplain.innerHTML = `<b>💡 บทวิเคราะห์เชิงลึกสำหรับอธิบายเด็กๆ:</b><br>${currentQuestion.explain}`;
-            modal.classList.remove('hidden');
-        }
-
-        function timeOut() {
-            clearInterval(timerInterval);
-            const modal = document.getElementById('result-modal');
-            const modalStatus = document.getElementById('modal-status');
-            const modalExplain = document.getElementById('modal-explain');
-            
-            let aspectText = { body: "ด้านร่างกาย", mind: "ด้านจิตใจและอารมณ์", social: "ด้านสังคม", intel: "ด้านสติปัญญา" }[currentQuestion.aspect];
-
-            modalStatus.innerHTML = `<span class="status-wrong">⏰ หมดเวลาถกเถียงกันแล้วจ้า!</span><br><small style="font-size:1.2rem; color:#666;">ไม่มีกลุ่มไหนได้คะแนนในข้อนี้ (เฉลยคือ: <b>${aspectText}</b>)</small>`;
-            modalExplain.innerHTML = `<b>💡 บทวิเคราะห์เชิงลึกสำหรับอธิบายเด็กๆ:</b><br>${currentQuestion.explain}`;
-            modal.classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('result-modal').classList.add('hidden');
-            // อัปเดตคะแนนสะสมขึ้นแสดงผลบน Scoreboard หลัก
-            for(let i=1; i<=5; i++) {
-                document.getElementById(`score${i}`).innerText = scores[i];
-            }
-            // ทำการสุ่มข้อต่อไปให้ครูมาร์ททันทีโดยไม่ต้องคลิกซ้ำ
-            nextQuestion();
-        }
-    </script>
-</body>
-</html>
