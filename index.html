@@ -31,7 +31,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* ห้ามมีแถบเลื่อนเด็ดขาด */
+            overflow: hidden;
         }
 
         /* โครงสร้างหลักแบบล็อกขนาดหน้าจอแอป */
@@ -57,7 +57,13 @@
             align-items: center;
             border-bottom: 3px dashed #ccc;
             padding-bottom: 10px;
-            height: 10%;
+            height: 12%;
+        }
+
+        .app-title-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
         .app-title {
@@ -66,6 +72,27 @@
             color: var(--secondary);
             margin: 0;
             text-shadow: 2px 2px 0px #E3E3E3;
+        }
+
+        /* ปุ่มหลักสำหรับครูมาร์ทกดควบคุมเกม */
+        .btn-control {
+            background: var(--warning);
+            color: var(--dark);
+            font-family: 'Chakra Petch', sans-serif;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 6px 15px;
+            border: 3px solid var(--dark);
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 3px 3px 0px var(--dark);
+            margin-top: 5px;
+            transition: 0.1s;
+        }
+
+        .btn-control:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px var(--dark);
         }
 
         /* บอร์ดคะแนน 5 กลุ่มด้านบน */
@@ -79,8 +106,8 @@
         .team-box {
             background: var(--dark);
             color: white;
-            padding: 5px 10px;
-            border-radius: 12px;
+            padding: 8px 12px;
+            border-radius: 16px;
             text-align: center;
             border: 3px solid transparent;
             display: flex;
@@ -94,30 +121,30 @@
             transform: scale(1.05);
         }
 
-        .team-name { font-size: 0.9rem; font-weight: bold; }
-        .team-score { font-size: 1.3rem; color: var(--warning); font-weight: bold; }
+        .team-name { font-size: 0.95rem; font-weight: bold; }
+        .team-score { font-size: 1.4rem; color: var(--warning); font-weight: bold; }
 
         /* พื้นที่ตรงกลาง: โจทย์ และ แถบเวลา */
         .main-playzone {
-            height: 50%;
+            height: 48%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 15px 0;
+            margin: 10px 0;
         }
 
         /* การ์ดโจทย์คำถามขนาดใหญ่ */
         .question-card {
             width: 100%;
-            height: 85%;
+            height: 82%;
             background: #FFF5E4;
             border: 4px solid var(--dark);
             border-radius: 24px;
             padding: 20px 40px;
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
             box-shadow: 4px 4px 0px var(--dark);
         }
 
@@ -142,18 +169,18 @@
         /* ตัวจับเวลาคล้าย Kahoot */
         .timer-zone {
             width: 100%;
-            height: 15%;
+            height: 18%;
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-top: 10px;
+            margin-top: 5px;
         }
 
         .timer-label {
             font-size: 1.2rem;
             font-weight: bold;
             color: var(--primary);
-            min-width: 90px;
+            min-width: 95px;
         }
 
         .timer-track {
@@ -172,7 +199,7 @@
             transition: width 1s linear;
         }
 
-        /* โซนเลือกกลุ่มที่จะตอบ (สเต็ป 1) */
+        /* โซนเลือกกลุ่มที่จะตอบ */
         .selector-zone {
             height: 10%;
             background: #E8F0FE;
@@ -181,7 +208,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             padding: 5px;
         }
 
@@ -193,14 +220,15 @@
 
         .team-btn {
             font-family: 'Chakra Petch', sans-serif;
-            padding: 6px 16px;
+            padding: 6px 18px;
             font-size: 1.1rem;
             font-weight: bold;
             border: 2px solid var(--dark);
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             background: white;
             box-shadow: 2px 2px 0px var(--dark);
+            transition: 0.1s;
         }
 
         .team-btn.selected {
@@ -210,7 +238,7 @@
             box-shadow: 0px 0px 0px var(--dark);
         }
 
-        /* โซนแผงปุ่มคำตอบ 4 สี (สเต็ป 2) */
+        /* โซนแผงปุ่มคำตอบ 4 สี */
         .answers-grid {
             height: 30%;
             display: grid;
@@ -223,7 +251,7 @@
             color: white;
             border: 3px solid var(--dark);
             border-radius: 20px;
-            padding: 15px 25px;
+            padding: 12px 25px;
             cursor: pointer;
             box-shadow: 4px 4px 0px var(--dark);
             display: flex;
@@ -273,7 +301,7 @@
             padding: 30px;
             text-align: center;
             box-shadow: 8px 8px 0px var(--dark);
-            animation: popIn 0.3s cubic-with-breathing;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         @keyframes popIn {
@@ -281,12 +309,12 @@
             100% { transform: scale(1); opacity: 1; }
         }
 
-        .modal-status { font-size: 2.5rem; font-weight: bold; margin-bottom: 15px; }
+        .modal-status { font-size: 2.3rem; font-weight: bold; margin-bottom: 15px; }
         .status-correct { color: var(--success); }
         .status-wrong { color: var(--primary); }
 
         .modal-explain {
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             color: #333;
             line-height: 1.6;
             background: #F8F9FA;
@@ -310,13 +338,6 @@
             box-shadow: 3px 3px 0px var(--dark);
         }
 
-        .btn-start-game {
-            background: var(--success);
-            color: white;
-            font-size: 1.5rem;
-            padding: 15px 40px;
-        }
-
         .hidden { display: none !important; }
     </style>
 </head>
@@ -324,9 +345,12 @@
 
     <div class="app-window">
         
-        <!-- ส่วนหัว: ชื่อเกม และ Scoreboard ของทั้ง 5 กลุ่ม -->
+        <!-- ส่วนหัว: ชื่อเกม ปุ่มควบคุมสำหรับครู และ Scoreboard -->
         <div class="app-header">
-            <h1 class="app-title">🎮 Teen Evolution ม.2</h1>
+            <div class="app-title-zone">
+                <h1 class="app-title">🎮 Teen Evolution ม.2</h1>
+                <button class="btn-control" id="control-game-btn" onclick="nextQuestion()">🎲 เริ่มสุ่มคำถาม</button>
+            </div>
             
             <div class="scoreboard">
                 <div class="team-box" id="team-box-1"><span class="team-name">🔴 กลุ่ม 1</span><span class="team-score" id="score1">0</span></div>
@@ -343,11 +367,11 @@
                 <div id="avatar" class="question-avatar">🚀</div>
                 <div id="situation-title" class="question-text" style="text-align: center; width: 100%;">
                     ยินดีต้อนรับคุณครูมาร์ทและนักเรียน ม.2 ทุกคน!<br>
-                    <button class="team-btn btn-close-modal btn-start-game" style="margin-top:20px;" onclick="nextQuestion()">🎲 เริ่มสุ่มคำถามข้อแรก</button>
+                    <span style="font-size:1.2rem; font-weight:normal; color:#666;">กดปุ่ม "🎲 เริ่มสุ่มคำถาม" ด้านบนเพื่อเริ่มความสนุกได้เลยเพื่อน!</span>
                 </div>
             </div>
 
-            <!-- แถบเวลาสไตล์ Kahoot -->
+            <!-- แถบเวลาถอยหลัง (ซ่อนไว้ก่อนเริ่มเกม) -->
             <div class="timer-zone" id="timer-area" style="visibility: hidden;">
                 <div class="timer-label" id="timer-text">เวลา: 25 วิ</div>
                 <div class="timer-track">
@@ -356,7 +380,7 @@
             </div>
         </div>
 
-        <!-- ขั้นตอนที่ 1: เลือกกลุ่มที่ยกมือก่อนเพื่อล็อกสิทธิ์ตอบคำถาม -->
+        <!-- แถบเลือกกลุ่มสิทธิ์การตอบ -->
         <div id="selector-zone" class="selector-zone" style="visibility: hidden;">
             <span class="selector-label">📢 กลุ่มไหนยกมือก่อน? ให้ครูคลิกเลือกกลุ่ม:</span>
             <button class="team-btn" id="btn-t1" onclick="selectTeam(1)">กลุ่ม 1</button>
@@ -366,7 +390,7 @@
             <button class="team-btn" id="btn-t5" onclick="selectTeam(5)">กลุ่ม 5</button>
         </div>
 
-        <!-- ขั้นตอนที่ 2: ปุ่มตัวเลือกคำถาม 4 ด้าน -->
+        <!-- แผงปุ่มคำตอบ 4 ด้าน -->
         <div id="answer-area" class="answers-grid" style="visibility: hidden;">
             <div class="answer-button kh-red" onclick="checkAnswer('body')">
                 <div class="answer-shape">▲</div>
@@ -398,7 +422,7 @@
             </div>
         </div>
 
-        <!-- หน้าต่างแอปเด้งขึ้นมาใหม่เมื่อเฉลยหรือหมดเวลา (Modal Popup) -->
+        <!-- หน้าต่างป๊อปอัปเฉลยผลลัพธ์ (Modal) -->
         <div id="result-modal" class="modal-overlay hidden">
             <div class="modal-content">
                 <div id="modal-status" class="modal-status">🏆 ผลลัพธ์คำตอบ</div>
@@ -410,7 +434,7 @@
     </div>
 
     <script>
-        // คลังข้อคำถามวิเคราะห์ 12 ข้อที่เหมาะสมกับเวลา 5-8 นาที
+        // คลังข้อคำถามวิเคราะห์ 12 ข้อ
         const situations = [
             { text: "เบสตั้งใจอ่านหนังสือสอบจนถึงตี 3 ติดต่อกันหลายวัน แต่พอเข้าห้องสอบจริงกลับรู้สึกเบลอ ตื้อ คิดเลขไม่ออก และมีอาการปวดหัวตึบๆ ปัจจัยต้นเหตุหลักส่งผลกระทบต่อพัฒนาการด้านใด?", aspect: "body", explain: "การนอนดึก (พักผ่อนไม่เพียงพอ) เป็นปัจจัยทางด้านร่างกายที่เป็นต้นเหตุแรกสุด ทำให้สมองเบลอและเกิดอาการทางกายภาพก่อน แล้วจึงส่งผลกระทบต่อเนื่องไปยังระบบความคิดความจำทีหลังครับ", avatar: "📝" },
             { text: "ฟ้าเห็นเพื่อนสนิทในกลุ่มพากันไปเจาะสะดือและย้อมสีผมสีแรงๆ ฟ้ากลัวว่าจะคุยกับเพื่อนไม่รู้เรื่องและกลัวเพื่อนไม่คบ จึงตัดสินใจไปทำตามเพื่อนบ้าง ปัจจัยนี้เกี่ยวข้องกับด้านใดที่สุด?", aspect: "social", explain: "มีแรงผลักดันมาจาก 'กลุ่มเพื่อน' และความต้องการ 'การยอมรับในกลุ่มสังคม' เพื่อให้เข้ากับพวกพ้องได้ วัยรุ่นจึงยอมเปลี่ยนแปลงพฤติกรรมภายนอกของตัวเองตามกลุ่มเพื่อน", avatar: "💇‍♀️" },
@@ -437,30 +461,38 @@
             selectedTeamNum = null;
             timeLeft = 25; 
             
-            // รีเซ็ตสถานะ UI บอร์ด
+            // รีเซ็ตสถานะ UI บอร์ดเลือกทีม
             for(let i=1; i<=5; i++) {
                 document.getElementById(`btn-t${i}`).classList.remove('selected');
                 document.getElementById(`team-box-${i}`).classList.remove('active-team');
             }
 
-            // สุ่มคำถาม
+            // สุ่มคำถามใหม่
             const randomIndex = Math.floor(Math.random() * situations.length);
             currentQuestion = situations[randomIndex];
 
             document.getElementById('avatar').innerText = currentQuestion.avatar;
             document.getElementById('situation-title').innerText = currentQuestion.text;
             
-            // เปิดแสดงองค์ประกอบทั้งหมดในหน้าจอเดียว
+            // เปิดแสดงองค์ประกอบแอปทั้งหมดพร้อมกัน
             document.getElementById('timer-area').style.visibility = 'visible';
             document.getElementById('selector-zone').style.visibility = 'visible';
             document.getElementById('answer-area').style.visibility = 'visible';
             
-            document.getElementById('start-btn').innerText = "⏭️ ข้ามข้อนี้";
+            // เปลี่ยนข้อความบนปุ่มหลักของครู
+            document.getElementById('control-game-btn').innerText = "⏭️ สุ่มข้อต่อไป";
 
-            // เริ่มนับเวลาแถบวิ่ง
+            // สั่งเริ่มเปิดตัวจับเวลาถอยหลัง 25 วินาที
             document.getElementById('timer-text').innerText = `เวลา: ${timeLeft} วิ`;
             const timerBar = document.getElementById('timer-bar');
+            
+            // ปิดอนิเมชันชั่วคราวเพื่อรีเซ็ตแถบให้เต็ม 100% ก่อนเริ่มวิ่งใหม่
+            timerBar.style.transition = 'none';
             timerBar.style.width = '100%';
+            
+            // บังคับให้เบราว์เซอร์รับรู้การเคลียร์ค่า ก่อนเปิดให้แถบอนิเมชันทำงาน
+            timerBar.offsetHeight; 
+            timerBar.style.transition = 'width 1s linear';
             
             timerInterval = setInterval(() => {
                 timeLeft--;
@@ -488,7 +520,7 @@
         function checkAnswer(selectedAspect) {
             if (!currentQuestion) return;
             if (selectedTeamNum === null) {
-                alert("📢 ครูมาร์ทอย่าลืมคลิกเลือก 'กลุ่มที่ยกมือก่อน' ในแถบสีฟ้าด้วยครับเพื่อน!");
+                alert("📢 ครูมาร์ทอย่าลืมคลิกเลือก 'กลุ่มที่ยกมือก่อน' ในแถบสีฟ้าด้านบนด้วยครับเพื่อน!");
                 return;
             }
 
@@ -501,37 +533,36 @@
             let aspectText = { body: "ด้านร่างกาย", mind: "ด้านจิตใจและอารมณ์", social: "ด้านสังคม", intel: "ด้านสติปัญญา" }[currentQuestion.aspect];
 
             if (selectedAspect === currentQuestion.aspect) {
-                // ตอบถูก
                 scores[selectedTeamNum] += 1;
                 modalStatus.innerHTML = `<span class="status-correct">🎉 ถูกต้องแม่นยำ! กลุ่มที่ ${selectedTeamNum} รับไป 1 คะแนน</span>`;
             } else {
-                // ตอบผิด
                 modalStatus.innerHTML = `<span class="status-wrong">❌ ยังไม่ถูกจ้า กลุ่มที่ ${selectedTeamNum}!</span><br><small style="font-size:1.2rem; color:#666;">เฉลยข้อนี้คือ: <b>${aspectText}</b></small>`;
             }
 
-            modalExplain.innerHTML = `<b>💡 บทวิเคราะห์เชิงลึก:</b> ${currentQuestion.explain}`;
+            modalExplain.innerHTML = `<b>💡 บทวิเคราะห์เชิงลึกสำหรับอธิบายเด็กๆ:</b><br>${currentQuestion.explain}`;
             modal.classList.remove('hidden');
         }
 
         function timeOut() {
+            clearInterval(timerInterval);
             const modal = document.getElementById('result-modal');
             const modalStatus = document.getElementById('modal-status');
             const modalExplain = document.getElementById('modal-explain');
             
             let aspectText = { body: "ด้านร่างกาย", mind: "ด้านจิตใจและอารมณ์", social: "ด้านสังคม", intel: "ด้านสติปัญญา" }[currentQuestion.aspect];
 
-            modalStatus.innerHTML = `<span class="status-wrong">⏰ หมดเวลาถกเถียงกันแล้วจ้า!</span><br><small style="font-size:1.2rem; color:#666;">ไม่มีกลุ่มไหนได้คะแนน (เฉลยคือ: <b>${aspectText}</b>)</small>`;
-            modalExplain.innerHTML = `<b>💡 บทวิเคราะห์เชิงลึก:</b> ${currentQuestion.explain}`;
+            modalStatus.innerHTML = `<span class="status-wrong">⏰ หมดเวลาถกเถียงกันแล้วจ้า!</span><br><small style="font-size:1.2rem; color:#666;">ไม่มีกลุ่มไหนได้คะแนนในข้อนี้ (เฉลยคือ: <b>${aspectText}</b>)</small>`;
+            modalExplain.innerHTML = `<b>💡 บทวิเคราะห์เชิงลึกสำหรับอธิบายเด็กๆ:</b><br>${currentQuestion.explain}`;
             modal.classList.remove('hidden');
         }
 
         function closeModal() {
             document.getElementById('result-modal').classList.add('hidden');
-            // อัปเดตคะแนนขึ้นบอร์ดหลักหลังจากปิดหน้าต่างป๊อปอัป
+            // อัปเดตคะแนนสะสมขึ้นแสดงผลบน Scoreboard หลัก
             for(let i=1; i<=5; i++) {
                 document.getElementById(`score${i}`).innerText = scores[i];
             }
-            // สุ่มข้อต่อไปทันที
+            // ทำการสุ่มข้อต่อไปให้ครูมาร์ททันทีโดยไม่ต้องคลิกซ้ำ
             nextQuestion();
         }
     </script>
