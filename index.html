@@ -11,14 +11,14 @@
             --secondary: #4D96FF;
             --success: #6BCB77;
             --warning: #FFD93D;
-            --bg: #F9F9F9;
+            --bg: #F0F3FF;
             --card-bg: #FFFFFF;
         }
 
         body {
             font-family: 'Chakra Petch', sans-serif;
             background-color: var(--bg);
-            background-image: radial-gradient(#e3e3e3 1px, transparent 1px);
+            background-image: radial-gradient(#d3dbff 1px, transparent 1px);
             background-size: 20px 20px;
             margin: 0;
             padding: 20px;
@@ -29,164 +29,161 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 950px;
             width: 100%;
             background: var(--card-bg);
             border: 4px solid #333;
             border-radius: 24px;
             box-shadow: 8px 8px 0px #333;
-            padding: 30px;
+            padding: 25px;
             box-sizing: border-box;
             text-align: center;
         }
 
         h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
+            color: #4D96FF;
+            font-size: 2.3rem;
             margin-top: 0;
             text-shadow: 2px 2px 0px #333;
             -webkit-text-stroke: 1px #333;
         }
 
         .scoreboard {
-            display: flex;
-            justify-content: space-around;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
             background: #333;
             color: white;
             padding: 15px;
             border-radius: 16px;
-            margin-bottom: 25px;
-            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .team-box {
+            background: #444;
+            padding: 10px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+        }
+
+        .team-box.active-team {
+            border-color: var(--warning);
+            background: #555;
+            box-shadow: 0 0 10px var(--warning);
+        }
+
+        .team-name { font-weight: bold; font-size: 1rem; }
+        .team-score { font-size: 1.4rem; color: var(--warning); font-weight: bold; margin-top: 5px;}
+
+        .team-selector-zone {
+            background: #E8F0FE;
+            border: 3px solid #333;
+            padding: 15px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+        }
+
+        .team-btn {
+            font-family: 'Chakra Petch', sans-serif;
+            padding: 8px 15px;
+            margin: 5px;
+            font-size: 1rem;
             font-weight: bold;
-        }
-
-        .team-score {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .score-btn {
-            background: var(--warning);
             border: 2px solid #333;
             border-radius: 8px;
             cursor: pointer;
-            font-family: 'Chakra Petch', sans-serif;
-            font-weight: bold;
-            margin-top: 5px;
-            padding: 2px 10px;
+            background: white;
+        }
+        .team-btn.selected {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 2px 2px 0px #333;
+        }
+
+        .timer-container {
+            width: 100%;
+            background-color: #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #333;
+            overflow: hidden;
+            display: none;
+        }
+
+        .timer-bar {
+            width: 100%;
+            height: 20px;
+            background-color: var(--primary);
+            transition: width 1s linear;
         }
 
         .card-zone {
             background: #FFF5E4;
             border: 3px dashed #FF9494;
             border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 25px;
-            min-height: 180px;
+            padding: 25px;
+            margin-bottom: 20px;
+            min-height: 140px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
         }
 
-        .avatar {
-            font-size: 4rem;
-            margin-bottom: 10px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .situation-text {
-            font-size: 1.6rem;
-            font-weight: bold;
-            color: #333;
-            margin: 10px 0;
-        }
-
-        .game-controls {
-            margin-bottom: 20px;
-        }
+        .avatar { font-size: 3.5rem; margin-bottom: 5px; }
+        .situation-text { font-size: 1.5rem; font-weight: bold; color: #333; line-height: 1.6; }
 
         .btn-main {
-            background: var(--secondary);
+            background: #6BCB77;
             color: white;
             border: 3px solid #333;
             border-radius: 12px;
-            padding: 12px 30px;
+            padding: 12px 35px;
             font-size: 1.3rem;
             font-family: 'Chakra Petch', sans-serif;
             font-weight: bold;
             cursor: pointer;
             box-shadow: 4px 4px 0px #333;
-            transition: 0.1s;
         }
-
-        .btn-main:active {
-            transform: translate(4px, 4px);
-            box-shadow: 0px 0px 0px #333;
-        }
+        .btn-main:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #333; }
 
         .answer-zone {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
 
         .answer-card {
-            background: white;
+            color: white;
             border: 3px solid #333;
             border-radius: 16px;
             padding: 20px;
             cursor: pointer;
             box-shadow: 4px 4px 0px #333;
-            transition: 0.2s;
             text-align: left;
+            transition: 0.1s;
         }
+        .answer-card:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0px #333; }
 
-        .answer-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 6px 6px 0px #333;
-        }
+        .kh-red { background-color: #E21B3C; }
+        .kh-blue { background-color: #1368CE; }
+        .kh-yellow { background-color: #D89E00; }
+        .kh-green { background-color: #26890C; }
 
-        .answer-card h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .effect-badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            border: 2px solid #333;
-            margin-top: 5px;
-        }
-
-        .bg-body { background-color: #FFB3B3; }
-        .bg-mind { background-color: #FFDBA4; }
-        .bg-social { background-color: #FFE9AE; }
-        .bg-intel { background-color: #C1F4C5; }
+        .answer-card h3 { margin: 0 0 5px 0; font-size: 1.4rem; }
+        .answer-card p { margin: 0; font-size: 0.95rem; opacity: 0.9; }
 
         .hidden { display: none !important; }
 
         .feedback {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: bold;
-            margin-top: 20px;
+            margin-top: 15px;
             padding: 15px;
             border-radius: 12px;
             border: 3px solid #333;
+            line-height: 1.5;
         }
         .correct { background: var(--success); color: white; }
         .wrong { background: var(--primary); color: white; }
@@ -196,56 +193,59 @@
 
     <div class="container">
         <h1>🚀 Teen Evolution: ฝ่าวิกฤตพัฒนาการวัยรุ่น 🚀</h1>
-        <p style="font-size: 1.1rem; font-weight: bold;">[วิชาสุขศึกษา ม.2 - ปัจจัยที่มีผลกระทบต่อเจริญเติบโตและพัฒนาการ]</p>
+        <p style="font-size: 1.1rem; font-weight: bold; margin: 5px 0 15px 0;">[วิชาสุขศึกษา ม.2 - เกมวิเคราะห์ปัจจัยกระทบพัฒนาการ]</p>
 
+        <!-- Scoreboard 5 กลุ่ม -->
         <div class="scoreboard">
-            <div class="team-score">
-                <span>🔴 กลุ่มที่ 1</span>
-                <span id="score1">0 คะแนน</span>
-                <button class="score-btn" onclick="addScore(1)">+1 คะแนน</button>
-            </div>
-            <div class="team-score">
-                <span>🔵 กลุ่มที่ 2</span>
-                <span id="score2">0 คะแนน</span>
-                <button class="score-btn" onclick="addScore(2)">+1 คะแนน</button>
-            </div>
-            <div class="team-score">
-                <span>🟢 กลุ่มที่ 3</span>
-                <span id="score3">0 คะแนน</span>
-                <button class="score-btn" onclick="addScore(3)">+1 คะแนน</button>
-            </div>
-            <div class="team-score">
-                <span>🟡 กลุ่มที่ 4</span>
-                <span id="score4">0 คะแนน</span>
-                <button class="score-btn" onclick="addScore(4)">+1 คะแนน</button>
-            </div>
+            <div class="team-box" id="team-box-1"><div class="team-name">🔴 กลุ่ม 1</div><div class="team-score" id="score1">0</div></div>
+            <div class="team-box" id="team-box-2"><div class="team-name">🔵 กลุ่ม 2</div><div class="team-score" id="score2">0</div></div>
+            <div class="team-box" id="team-box-3"><div class="team-name">🟢 กลุ่ม 3</div><div class="team-score" id="score3">0</div></div>
+            <div class="team-box" id="team-box-4"><div class="team-name">🟡 กลุ่ม 4</div><div class="team-score" id="score4">0</div></div>
+            <div class="team-box" id="team-box-5"><div class="team-name">🟣 กลุ่ม 5</div><div class="team-score" id="score5">0</div></div>
         </div>
 
-        <div class="game-controls">
-            <button id="start-btn" class="btn-main" onclick="nextQuestion()">🎲 สุ่มสถานการณ์ (เริ่มเกม)</button>
+        <div style="margin-bottom: 20px;">
+            <button id="start-btn" class="btn-main" onclick="nextQuestion()">🎲 เริ่มเกม / สุ่มสถานการณ์</button>
         </div>
 
+        <!-- ส่วนเลือกกลุ่มที่จะตอบ -->
+        <div id="selector-zone" class="team-selector-zone hidden">
+            <p style="margin: 0 0 10px 0; font-weight: bold; color: #555;">📢 กลุ่มไหนยกมือก่อน? ให้ครูคลิกเลือกกลุ่มนั้นเพื่อเตรียมตอบ:</p>
+            <button class="team-btn" id="btn-t1" onclick="selectTeam(1)">กลุ่ม 1</button>
+            <button class="team-btn" id="btn-t2" onclick="selectTeam(2)">กลุ่ม 2</button>
+            <button class="team-btn" id="btn-t3" onclick="selectTeam(3)">กลุ่ม 3</button>
+            <button class="team-btn" id="btn-t4" onclick="selectTeam(4)">กลุ่ม 4</button>
+            <button class="team-btn" id="btn-t5" onclick="selectTeam(5)">กลุ่ม 5</button>
+        </div>
+
+        <!-- แถบเวลาถอยหลัง -->
+        <div class="timer-container" id="timer-area">
+            <div class="timer-bar" id="timer-bar"></div>
+        </div>
+
+        <!-- การ์ดสถานการณ์ -->
         <div id="card-area" class="card-zone hidden">
             <div id="avatar" class="avatar">👦</div>
-            <div id="situation-title" class="situation-text">กดปุ่มด้านบนเพื่อเริ่มวิเคราะห์ปัจจัย!</div>
+            <div id="situation-title" class="situation-text">คำถามกำลังจะมา...</div>
         </div>
 
+        <!-- ปุ่มตัวเลือก 4 ด้าน -->
         <div id="answer-area" class="answer-zone hidden">
-            <div class="answer-card bg-body" onclick="checkAnswer('body')">
-                <h3>🏃‍♂️ ด้านร่างกาย</h3>
-                <p>ส่งผลต่อการเจริญเติบโต, พันธุกรรม, สารอาหาร หรือการพักผ่อน</p>
+            <div class="answer-card kh-red" onclick="checkAnswer('body')">
+                <h3>🟥 ด้านร่างกาย</h3>
+                <p>การเจริญเติบโต, พันธุกรรม, สารอาหาร, การพักผ่อน, สารเสพติด</p>
             </div>
-            <div class="answer-card bg-mind" onclick="checkAnswer('mind')">
-                <h3>🧠 ด้านจิตใจและอารมณ์</h3>
-                <p>ส่งผลต่อความเครียด, ความมั่นใจ, การควบคุมอารมณ์ หรือความสุข</p>
+            <div class="answer-card kh-blue" onclick="checkAnswer('mind')">
+                <h3>🟦 ด้านจิตใจและอารมณ์</h3>
+                <p>ความเครียด, ความมั่นใจ, การควบคุมอารมณ์, ความวิตกกังวล</p>
             </div>
-            <div class="answer-card bg-social" onclick="checkAnswer('social')">
-                <h3>👥 ด้านสังคม</h3>
-                <p>ส่งผลต่อการปรับตัวเข้ากับเพื่อน, ครอบครัว, โรงเรียน หรือสิ่งแวดล้อม</p>
+            <div class="answer-card kh-yellow" onclick="checkAnswer('social')">
+                <h3>🟨 ด้านสังคม</h3>
+                <p>กลุ่มเพื่อน, ครอบครัว, การยอมรับ, การปรับตัวเข้ากับผู้อื่น</p>
             </div>
-            <div class="answer-card bg-intel" onclick="checkAnswer('intel')">
-                <h3>💡 ด้านสติปัญญา</h3>
-                <p>ส่งผลต่อการเรียนรู้, ความคิดสร้างสรรค์, ความจำ หรือการแก้ปัญหา</p>
+            <div class="answer-card kh-green" onclick="checkAnswer('intel')">
+                <h3>🟩 ด้านสติปัญญา</h3>
+                <p>การเรียนรู้, ความจำ, การคิดวิเคราะห์, การแก้ปัญหาเชิงตรรกะ</p>
             </div>
         </div>
 
@@ -254,64 +254,169 @@
     </div>
 
     <script>
-        // คลังข้อมูลสถานการณ์ (อิงตามปัจจัยภายใน-ภายนอกของ พว.)
+        // คลังข้อคำถามเน้นการวิเคราะห์เชิงลึก 12 ข้อ (เหมาะกับเวลา 5-8 นาที)
         const situations = [
-            { text: "นอนดึกเพื่อเล่นเกมติดต่อกันหลายวัน อ่อนเพลียในห้องเรียน", aspect: "body", type: "ลบ (-)", avatar: "🎮" },
-            { text: "ได้รับคำชมจากครอบครัวและคุณครูเมื่อตั้งใจทำกิจกรรม", aspect: "mind", type: "บวก (+)", avatar: "💖" },
-            { text: "ชอบดื่มชานมไข่มุกและกินขนมขบเคี้ยวแทนข้าวเย็นบ่อยๆ", aspect: "body", type: "ลบ (-)", avatar: "🧋" },
-            { text: "เข้าร่วมชมรมดนตรีของโรงเรียนและได้ทำความรู้จักเพื่อนใหม่ๆ", aspect: "social", type: "บวก (+)", avatar: "🎸" },
-            { text: "ฝึกซ้อมเล่นหมากรุกและบอร์ดเกมวางแผนเป็นประจำหลังเลิกเรียน", aspect: "intel", type: "บวก (+)", avatar: "🧩" },
-            { text: "ทะเลาะกับเพื่อนสนิทในกลุ่ม ทำให้รู้สึกวิตกกังวลและไม่มีสมาธิ", aspect: "mind", type: "ลบ (-)", avatar: "😢" },
-            { text: "คุณพ่อคุณแม่ชวนไปวิ่งออกกำลังกายที่สวนสาธารณะทุกเย็นวันเสาร์", aspect: "body", type: "บวก (+)", avatar: "🏃‍♂️" },
-            { text: "อยู่ในชุมชนที่มีการแพร่ระบาดของสารเสพติดและมั่วสุม", aspect: "social", type: "ลบ (-)", avatar: "🏚️" },
-            { text: "ชอบสืบค้นข้อมูลและอ่านบทความวิจัยที่สนใจผ่านอินเทอร์เน็ต", aspect: "intel", type: "บวก (+)", avatar: "💻" },
-            { text: "โดนเพื่อนในห้องล้อเลียนเรื่องรูปร่างหน้าตาจนไม่กล้าแสดงออก", aspect: "mind", type: "ลบ (-)", avatar: "💔" }
+            { 
+                text: "เบสตั้งใจอ่านหนังสือสอบจนถึงตี 3 ติดต่อกันหลายวัน แต่พอเข้าห้องสอบจริงกลับรู้สึกเบลอ ตื้อ คิดเลขไม่ออก และมีอาการปวดหัวตึบๆ ปัจจัยต้นเหตุหลักส่งผลกระทบต่อพัฒนาการด้านใด?", 
+                aspect: "body", 
+                explain: "การนอนดึก (พักผ่อนไม่เพียงพอ) เป็นปัจจัยทางด้านร่างกายที่เป็นต้นเหตุแรกสุด ทำให้สมองเบลอและเกิดอาการทางกายภาพก่อน แล้วจึงส่งผลกระทบชิ่งไปยังระบบความคิดความจำทีหลัง",
+                avatar: "📝" 
+            },
+            { 
+                text: "ฟ้าเห็นเพื่อนสนิทในกลุ่มพากันไปเจาะสะดือและย้อมสีผมสีแรงๆ ฟ้ากลัวว่าจะคุยกับเพื่อนไม่รู้เรื่องและกลัวเพื่อนไม่คบ จึงตัดสินใจไปทำตามเพื่อนบ้าง ปัจจัยนี้เกี่ยวข้องกับด้านใดที่สุด?", 
+                aspect: "social", 
+                explain: "มีแรงผลักดันมาจาก 'กลุ่มเพื่อน' และความต้องการ 'การยอมรับในกลุ่มสังคม' เพื่อให้เข้ากับพวกพ้องได้ วัยรุ่นจึงยอมเปลี่ยนแปลงพฤติกรรมภายนอกของตัวเองตามกลุ่ม",
+                avatar: "💇‍♀️" 
+            },
+            { 
+                text: "โอ๊ตแอบชอบเพื่อนคนหนึ่งในห้อง พอเห็นเขาเดินผ่าน โอ๊ตจะรู้สึกใจสั่น มือสั่น ทำตัวไม่ถูก และบางทีก็หงุดหงิดง่ายขึ้นโดยไม่มีสาเหตุ ปัจจัยภายในนี้กระทบต่อด้านใดโดยตรง?", 
+                aspect: "mind", 
+                explain: "เป็นเรื่องความรู้สึกหวั่นไหวภายในจิตใจ การควบคุมอารมณ์ที่แปรปรวนง่าย และการตอบสนองต่อสิ่งเร้าทางความรู้สึก ซึ่งเป็นแกนหลักของพัฒนาการด้านจิตใจและอารมณ์ในวัยรุ่น",
+                avatar: "😳" 
+            },
+            { 
+                text: "พีทชอบเล่นเกมแนวสืบสวนและต่อจิ๊กซอว์ 1,000 ชิ้นคนเดียวในห้อง พีทสามารถจำรายละเอียดของเรื่องราวต่างๆ ได้แม่นยำมาก แต่ไม่ชอบออกไปคุยกับใคร พัฒนาการเด่นของพีทคือด้านใด?", 
+                aspect: "intel", 
+                explain: "เกี่ยวข้องโดยตรงกับความจำ กระบวนการคิดวิเคราะห์ และการแก้ปัญหาเชิงตรรกะ แม้พฤติกรรมจะดูแยกตัวไม่เข้าสังคม แต่ตัวชี้วัดความสามารถในโจทย์เน้นเรื่องศักยภาพทางสมอง",
+                avatar: "🧩" 
+            },
+            { 
+                text: "แก้วประจำเดือนมาไม่ปกติและเริ่มมีสิวขึ้นเต็มใบหน้า ทำให้แก้วส่องกระจกทีไรก็รู้สึกหงุดหงิด ไม่มั่นใจ และไม่อยากออกไปเจอหน้าใครเลย ปัจจัยแรกเริ่มที่เป็นตัวกระตุ้นคือด้านใด?", 
+                aspect: "body", 
+                explain: "ปัจจัยแรกเริ่มคือ 'ฮอร์โมนร่างกาย' (ประจำเดือน/สิว) ซึ่งเป็นพัฒนาการทางกายภาพตามธรรมชาติของวัยรุ่น จากนั้นการเปลี่ยนแปลงทางกายนี้ค่อยส่งผลกระทบต่อเนื่องไปทำให้จิตใจขาดความมั่นใจ",
+                avatar: "🧼" 
+            },
+            { 
+                text: "คิวทะเลาะกับคุณพ่อคุณแม่เรื่องติดเกมอย่างหนัก คิวรู้สึกน้อยใจคิดว่าไม่มีใครรัก จึงหนีออกจากบ้านมาอาศัยอยู่กับกลุ่มรุ่นพี่นอกโรงเรียน ปัจจัยแวดล้อมที่กำลังส่งผลกระทบต่อคิวตอนนี้คือด้านใด?", 
+                aspect: "social", 
+                explain: "เกี่ยวข้องกับสถาบันครอบครัว และการเปลี่ยนกลุ่มสภาพแวดล้อมรอบตัวไปอยู่กับกลุ่มรุ่นพี่นอกบ้าน ซึ่งทั้งสองส่วนนี้ถือเป็นปัจจัยภายนอกที่มีอิทธิพลต่อพัฒนาการทางด้านสังคม",
+                avatar: "🏠" 
+            },
+            { 
+                text: "เนยรู้สึกเครียดสะสมจากการเรียนออนไลน์ พอนั่งหน้าคอมพิวเตอร์นานๆ ก็เริ่มร้องไห้ออกมาอย่างไร้สาเหตุ และควบคุมอารมณ์โกรธของตัวเองไม่ได้ ปัจจัยนี้แสดงออกถึงผลกระทบด้านใด?", 
+                aspect: "mind", 
+                explain: "ภาวะความเครียดสะสม การร้องไห้โดยควบคุมไม่ได้ และการไม่สามารถจัดการอารมณ์แปรปรวนของตัวเองได้ เป็นตัวบ่งชี้ของผลกระทบต่อพัฒนาการด้านจิตใจและอารมณ์",
+                avatar: "💻" 
+            },
+            { 
+                text: "ท็อปย้ายโรงเรียนใหม่ตอน ม.2 วันแรกเขารู้สึกเกร็งมาก แต่เขาพยายามเข้าไปทักทาย ชวนเพื่อนคุยเรื่องฟุตบอล และอาสาช่วยครูยกของจนเริ่มมีคนชอบ ปัจจัยนี้คือการปรับตัวทางด้านใด?", 
+                aspect: "social", 
+                explain: "เด่นชัดมากในเรื่องของทักษะการปรับตัวให้เข้ากับสิ่งแวดล้อมใหม่ การสร้างมนุษยสัมพันธ์ และการแสดงบทบาทหน้าที่ในกลุ่มคน ซึ่งเป็นหัวใจหลักของพัฒนาการด้านสังคม",
+                avatar: "⚽" 
+            },
+            { 
+                text: "คุณพ่อคุณแม่ของบอยเป็นคนรูปร่างสูงใหญ่ บอยจึงมีส่วนสูงที่เพิ่มขึ้นอย่างรวดเร็วกว่าเพื่อนในวัยเดียวกัน ปัจจัยที่มีผลกระทบในข้อนี้มาจากสิ่งใดและด้านใด?", 
+                aspect: "body", 
+                explain: "ความสูงที่ได้มาจากพ่อแม่คือปัจจัยภายในที่เรียกว่า 'พันธุกรรม' ซึ่งส่งผลกระทบและกำหนดโครงสร้างการเจริญเติบโตทางด้านร่างกายโดยตรง",
+                avatar: "🦒" 
+            },
+            { 
+                text: "เอมชอบเข้าร่วมกิจกรรมโต้วาทีและรับฟังเหตุผลของผู้อื่นเสมอ ทำให้เอมเป็นคนใจกว้าง สามารถแยกแยะข้อดีข้อเสียของเรื่องต่างๆ และกล้าตัดสินใจแก้ปัญหาด้วยตัวเอง พัฒนาการเด่นคือด้านใด?", 
+                aspect: "intel", 
+                explain: "การใช้เหตุผล การรับฟังความคิดเห็นเพื่อนำมาวิเคราะห์ การแยกแยะข้อดีข้อเสีย และการตัดสินใจแก้ปัญหาอย่างมีระบบ เป็นลักษณะเด่นของพัฒนาการด้านสติปัญญาขั้นสูงในวัยรุ่น",
+                avatar: "🗣️" 
+            },
+            { 
+                text: "ตูนมักจะรู้สึกหงุดหงิดฉุนเฉียวและขึ้นเสียงใส่คนในบ้านบ่อยๆ แต่หลังจากอารมณ์เย็นลง ตูนจะรู้สึกผิดและเข้าไปกราบขอโทษพ่อแม่ทันที พฤติกรรมที่แปรปรวนง่ายนี้จัดอยู่ในด้านใด?", 
+                aspect: "mind", 
+                explain: "ลักษณะอารมณ์ที่ขึ้นลงแปรปรวนอย่างรวดเร็ว (หงุดหงิดง่ายแต่ก็รู้สึกผิดได้เร็ว) เป็นธรรมชาติของวัยรุ่นที่ระบบควบคุมอารมณ์ยังพัฒนาไม่เต็มที่ จึงจัดอยู่ในด้านจิตใจและอารมณ์",
+                avatar: "⚡" 
+            },
+            { 
+                text: "โจ้อาศัยอยู่ในบ้านที่คนในครอบครัวมักจะใช้เหตุผลคุยกัน ชื่นชมเมื่อโจ้ทำดี และยอมรับฟังสื่อสารกันตรงๆ ทำให้โจ้เป็นเด็กอารมณ์ดีและมีบุคลิกภาพที่มั่นคง ปัจจัยภายนอกนี้คืออะไร?", 
+                aspect: "social", 
+                explain: "สิ่งแวดล้อมและการเลี้ยงดูภายใน 'ครอบครัว' ถือเป็นปัจจัยภายนอกทางด้านสังคมที่สำคัญที่สุดในการหล่อหลอมและส่งผลกระทบต่อพฤติกรรมและพัฒนาการรอบด้านของวัยรุ่น",
+                avatar: "👨‍👩‍👦" 
+            }
         ];
 
         let currentQuestion = null;
-        let scores = { 1: 0, 2: 0, 3: 0, 4: 0 };
+        let selectedTeamNum = null;
+        let scores = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+        let timerInterval = null;
+        let timeLeft = 25; 
 
         function nextQuestion() {
-            // สุ่มสถานการณ์
+            clearInterval(timerInterval);
+            selectedTeamNum = null;
+            timeLeft = 25; 
+            
+            for(let i=1; i<=5; i++) {
+                document.getElementById(`btn-t${i}`).classList.remove('selected');
+                document.getElementById(`team-box-${i}`).classList.remove('active-team');
+            }
+
             const randomIndex = Math.floor(Math.random() * situations.length);
             currentQuestion = situations[randomIndex];
 
-            // อัปเดตหน้าจอ
             document.getElementById('avatar').innerText = currentQuestion.avatar;
             document.getElementById('situation-title').innerText = currentQuestion.text;
             
-            // แสดงพื้นที่เล่นเกม
             document.getElementById('card-area').classList.remove('hidden');
+            document.getElementById('selector-zone').classList.remove('hidden');
             document.getElementById('answer-area').classList.remove('hidden');
+            document.getElementById('timer-area').style.display = 'block';
             document.getElementById('feedback-area').classList.add('hidden');
+            document.getElementById('start-btn').innerText = "⏭️ ข้าม / สุ่มข้อต่อไป";
+
+            const timerBar = document.getElementById('timer-bar');
+            timerBar.style.width = '100%';
             
-            document.getElementById('start-btn').innerText = "🎲 สุ่มสถานการณ์ถัดไป";
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                let widthPercentage = (timeLeft / 25) * 100;
+                timerBar.style.width = widthPercentage + '%';
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timeOut();
+                }
+            }, 1000);
+        }
+
+        function selectTeam(teamNum) {
+            selectedTeamNum = teamNum;
+            for(let i=1; i<=5; i++) {
+                document.getElementById(`btn-t${i}`).classList.remove('selected');
+                document.getElementById(`team-box-${i}`).classList.remove('active-team');
+            }
+            document.getElementById(`btn-t${teamNum}`).classList.add('selected');
+            document.getElementById(`team-box-${teamNum}`).classList.add('active-team');
         }
 
         function checkAnswer(selectedAspect) {
             if (!currentQuestion) return;
+            if (selectedTeamNum === null) {
+                alert("📢 ครูมาร์ทอย่าลืมคลิกเลือกกลุ่มที่ได้สิทธิ์ตอบในแถบสีฟ้าก่อนนะครับ!");
+                return;
+            }
+
+            clearInterval(timerInterval);
+            document.getElementById('timer-area').style.display = 'none';
 
             const feedbackArea = document.getElementById('feedback-area');
             feedbackArea.classList.remove('hidden');
 
-            let aspectName = "";
-            if(currentQuestion.aspect === 'body') aspectName = "ด้านร่างกาย";
-            if(currentQuestion.aspect === 'mind') aspectName = "ด้านจิตใจและอารมณ์";
-            if(currentQuestion.aspect === 'social') aspectName = "ด้านสังคม";
-            if(currentQuestion.aspect === 'intel') aspectName = "ด้านสติปัญญา";
+            let aspectText = { body: "ด้านร่างกาย", mind: "ด้านจิตใจและอารมณ์", social: "ด้านสังคม", intel: "ด้านสติปัญญา" }[currentQuestion.aspect];
 
             if (selectedAspect === currentQuestion.aspect) {
+                scores[selectedTeamNum] += 1;
+                document.getElementById(`score${selectedTeamNum}`).innerText = scores[selectedTeamNum];
+                
                 feedbackArea.className = "feedback correct";
-                feedbackArea.innerHTML = `🎉 ถูกต้อง! ปัจจัยนี้ส่งผลกระทบหลักต่อ <b>${aspectName}</b> ในทาง <b>${currentQuestion.type}</b><br><small>บวกคะแนนให้กลุ่มที่ตอบถูกได้เลยเพื่อน!</small>`;
+                feedbackArea.innerHTML = `🎉 ถูกต้อง! กลุ่มที่ ${selectedTeamNum} รับไป 1 แต้ม!<br>💡 <b>วิเคราะห์เชิงลึก:</b> ${currentQuestion.explain}`;
             } else {
                 feedbackArea.className = "feedback wrong";
-                feedbackArea.innerHTML = `❌ ยังไม่ถูกจ้า! ลองวิเคราะห์ใหม่อีกครั้ง หรือเฉลยคือกระทบต่อ <b>${aspectName}</b> (${currentQuestion.type})`;
+                feedbackArea.innerHTML = `❌ ยังไม่ถูกจ้า กลุ่มที่ ${selectedTeamNum}! <br>เฉลยคือตอบ <b>${aspectText}</b> <br>💡 <b>วิเคราะห์เชิงลึก:</b> ${currentQuestion.explain}`;
             }
         }
 
-        function addScore(teamNum) {
-            scores[teamNum] += 1;
-            document.getElementById(`score${teamNum}`).innerText = `${scores[teamNum]} คะแนน`;
+        function timeOut() {
+            document.getElementById('timer-area').style.display = 'none';
+            const feedbackArea = document.getElementById('feedback-area');
+            feedbackArea.classList.remove('hidden');
+            feedbackArea.className = "feedback wrong";
+            feedbackArea.innerHTML = "⏰ หมดเวลาถกเถียงแล้วจ้าเด็กๆ! เฉลยข้อนี้คือตอบด้าน <b>" + { body: "ร่างกาย", mind: "จิตใจและอารมณ์", social: "สังคม", intel: "สติปัญญา" }[currentQuestion.aspect] + "</b><br>เนื่องจาก: " + currentQuestion.explain;
         }
     </script>
 </body>
