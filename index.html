@@ -1,0 +1,318 @@
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teen Evolution: ฝ่าวิกฤตพัฒนาการวัยรุ่น 🚀</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&display=swap');
+
+        :root {
+            --primary: #FF6B6B;
+            --secondary: #4D96FF;
+            --success: #6BCB77;
+            --warning: #FFD93D;
+            --bg: #F9F9F9;
+            --card-bg: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Chakra Petch', sans-serif;
+            background-color: var(--bg);
+            background-image: radial-gradient(#e3e3e3 1px, transparent 1px);
+            background-size: 20px 20px;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--card-bg);
+            border: 4px solid #333;
+            border-radius: 24px;
+            box-shadow: 8px 8px 0px #333;
+            padding: 30px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-top: 0;
+            text-shadow: 2px 2px 0px #333;
+            -webkit-text-stroke: 1px #333;
+        }
+
+        .scoreboard {
+            display: flex;
+            justify-content: space-around;
+            background: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .team-score {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .score-btn {
+            background: var(--warning);
+            border: 2px solid #333;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: bold;
+            margin-top: 5px;
+            padding: 2px 10px;
+        }
+
+        .card-zone {
+            background: #FFF5E4;
+            border: 3px dashed #FF9494;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .avatar {
+            font-size: 4rem;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .situation-text {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .game-controls {
+            margin-bottom: 20px;
+        }
+
+        .btn-main {
+            background: var(--secondary);
+            color: white;
+            border: 3px solid #333;
+            border-radius: 12px;
+            padding: 12px 30px;
+            font-size: 1.3rem;
+            font-family: 'Chakra Petch', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #333;
+            transition: 0.1s;
+        }
+
+        .btn-main:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px #333;
+        }
+
+        .answer-zone {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .answer-card {
+            background: white;
+            border: 3px solid #333;
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #333;
+            transition: 0.2s;
+            text-align: left;
+        }
+
+        .answer-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 6px 6px 0px #333;
+        }
+
+        .answer-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .effect-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border: 2px solid #333;
+            margin-top: 5px;
+        }
+
+        .bg-body { background-color: #FFB3B3; }
+        .bg-mind { background-color: #FFDBA4; }
+        .bg-social { background-color: #FFE9AE; }
+        .bg-intel { background-color: #C1F4C5; }
+
+        .hidden { display: none !important; }
+
+        .feedback {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 12px;
+            border: 3px solid #333;
+        }
+        .correct { background: var(--success); color: white; }
+        .wrong { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🚀 Teen Evolution: ฝ่าวิกฤตพัฒนาการวัยรุ่น 🚀</h1>
+        <p style="font-size: 1.1rem; font-weight: bold;">[วิชาสุขศึกษา ม.2 - ปัจจัยที่มีผลกระทบต่อเจริญเติบโตและพัฒนาการ]</p>
+
+        <div class="scoreboard">
+            <div class="team-score">
+                <span>🔴 กลุ่มที่ 1</span>
+                <span id="score1">0 คะแนน</span>
+                <button class="score-btn" onclick="addScore(1)">+1 คะแนน</button>
+            </div>
+            <div class="team-score">
+                <span>🔵 กลุ่มที่ 2</span>
+                <span id="score2">0 คะแนน</span>
+                <button class="score-btn" onclick="addScore(2)">+1 คะแนน</button>
+            </div>
+            <div class="team-score">
+                <span>🟢 กลุ่มที่ 3</span>
+                <span id="score3">0 คะแนน</span>
+                <button class="score-btn" onclick="addScore(3)">+1 คะแนน</button>
+            </div>
+            <div class="team-score">
+                <span>🟡 กลุ่มที่ 4</span>
+                <span id="score4">0 คะแนน</span>
+                <button class="score-btn" onclick="addScore(4)">+1 คะแนน</button>
+            </div>
+        </div>
+
+        <div class="game-controls">
+            <button id="start-btn" class="btn-main" onclick="nextQuestion()">🎲 สุ่มสถานการณ์ (เริ่มเกม)</button>
+        </div>
+
+        <div id="card-area" class="card-zone hidden">
+            <div id="avatar" class="avatar">👦</div>
+            <div id="situation-title" class="situation-text">กดปุ่มด้านบนเพื่อเริ่มวิเคราะห์ปัจจัย!</div>
+        </div>
+
+        <div id="answer-area" class="answer-zone hidden">
+            <div class="answer-card bg-body" onclick="checkAnswer('body')">
+                <h3>🏃‍♂️ ด้านร่างกาย</h3>
+                <p>ส่งผลต่อการเจริญเติบโต, พันธุกรรม, สารอาหาร หรือการพักผ่อน</p>
+            </div>
+            <div class="answer-card bg-mind" onclick="checkAnswer('mind')">
+                <h3>🧠 ด้านจิตใจและอารมณ์</h3>
+                <p>ส่งผลต่อความเครียด, ความมั่นใจ, การควบคุมอารมณ์ หรือความสุข</p>
+            </div>
+            <div class="answer-card bg-social" onclick="checkAnswer('social')">
+                <h3>👥 ด้านสังคม</h3>
+                <p>ส่งผลต่อการปรับตัวเข้ากับเพื่อน, ครอบครัว, โรงเรียน หรือสิ่งแวดล้อม</p>
+            </div>
+            <div class="answer-card bg-intel" onclick="checkAnswer('intel')">
+                <h3>💡 ด้านสติปัญญา</h3>
+                <p>ส่งผลต่อการเรียนรู้, ความคิดสร้างสรรค์, ความจำ หรือการแก้ปัญหา</p>
+            </div>
+        </div>
+
+        <div id="feedback-area" class="feedback hidden"></div>
+
+    </div>
+
+    <script>
+        // คลังข้อมูลสถานการณ์ (อิงตามปัจจัยภายใน-ภายนอกของ พว.)
+        const situations = [
+            { text: "นอนดึกเพื่อเล่นเกมติดต่อกันหลายวัน อ่อนเพลียในห้องเรียน", aspect: "body", type: "ลบ (-)", avatar: "🎮" },
+            { text: "ได้รับคำชมจากครอบครัวและคุณครูเมื่อตั้งใจทำกิจกรรม", aspect: "mind", type: "บวก (+)", avatar: "💖" },
+            { text: "ชอบดื่มชานมไข่มุกและกินขนมขบเคี้ยวแทนข้าวเย็นบ่อยๆ", aspect: "body", type: "ลบ (-)", avatar: "🧋" },
+            { text: "เข้าร่วมชมรมดนตรีของโรงเรียนและได้ทำความรู้จักเพื่อนใหม่ๆ", aspect: "social", type: "บวก (+)", avatar: "🎸" },
+            { text: "ฝึกซ้อมเล่นหมากรุกและบอร์ดเกมวางแผนเป็นประจำหลังเลิกเรียน", aspect: "intel", type: "บวก (+)", avatar: "🧩" },
+            { text: "ทะเลาะกับเพื่อนสนิทในกลุ่ม ทำให้รู้สึกวิตกกังวลและไม่มีสมาธิ", aspect: "mind", type: "ลบ (-)", avatar: "😢" },
+            { text: "คุณพ่อคุณแม่ชวนไปวิ่งออกกำลังกายที่สวนสาธารณะทุกเย็นวันเสาร์", aspect: "body", type: "บวก (+)", avatar: "🏃‍♂️" },
+            { text: "อยู่ในชุมชนที่มีการแพร่ระบาดของสารเสพติดและมั่วสุม", aspect: "social", type: "ลบ (-)", avatar: "🏚️" },
+            { text: "ชอบสืบค้นข้อมูลและอ่านบทความวิจัยที่สนใจผ่านอินเทอร์เน็ต", aspect: "intel", type: "บวก (+)", avatar: "💻" },
+            { text: "โดนเพื่อนในห้องล้อเลียนเรื่องรูปร่างหน้าตาจนไม่กล้าแสดงออก", aspect: "mind", type: "ลบ (-)", avatar: "💔" }
+        ];
+
+        let currentQuestion = null;
+        let scores = { 1: 0, 2: 0, 3: 0, 4: 0 };
+
+        function nextQuestion() {
+            // สุ่มสถานการณ์
+            const randomIndex = Math.floor(Math.random() * situations.length);
+            currentQuestion = situations[randomIndex];
+
+            // อัปเดตหน้าจอ
+            document.getElementById('avatar').innerText = currentQuestion.avatar;
+            document.getElementById('situation-title').innerText = currentQuestion.text;
+            
+            // แสดงพื้นที่เล่นเกม
+            document.getElementById('card-area').classList.remove('hidden');
+            document.getElementById('answer-area').classList.remove('hidden');
+            document.getElementById('feedback-area').classList.add('hidden');
+            
+            document.getElementById('start-btn').innerText = "🎲 สุ่มสถานการณ์ถัดไป";
+        }
+
+        function checkAnswer(selectedAspect) {
+            if (!currentQuestion) return;
+
+            const feedbackArea = document.getElementById('feedback-area');
+            feedbackArea.classList.remove('hidden');
+
+            let aspectName = "";
+            if(currentQuestion.aspect === 'body') aspectName = "ด้านร่างกาย";
+            if(currentQuestion.aspect === 'mind') aspectName = "ด้านจิตใจและอารมณ์";
+            if(currentQuestion.aspect === 'social') aspectName = "ด้านสังคม";
+            if(currentQuestion.aspect === 'intel') aspectName = "ด้านสติปัญญา";
+
+            if (selectedAspect === currentQuestion.aspect) {
+                feedbackArea.className = "feedback correct";
+                feedbackArea.innerHTML = `🎉 ถูกต้อง! ปัจจัยนี้ส่งผลกระทบหลักต่อ <b>${aspectName}</b> ในทาง <b>${currentQuestion.type}</b><br><small>บวกคะแนนให้กลุ่มที่ตอบถูกได้เลยเพื่อน!</small>`;
+            } else {
+                feedbackArea.className = "feedback wrong";
+                feedbackArea.innerHTML = `❌ ยังไม่ถูกจ้า! ลองวิเคราะห์ใหม่อีกครั้ง หรือเฉลยคือกระทบต่อ <b>${aspectName}</b> (${currentQuestion.type})`;
+            }
+        }
+
+        function addScore(teamNum) {
+            scores[teamNum] += 1;
+            document.getElementById(`score${teamNum}`).innerText = `${scores[teamNum]} คะแนน`;
+        }
+    </script>
+</body>
+</html>
